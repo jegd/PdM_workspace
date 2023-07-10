@@ -1,0 +1,10 @@
+20:36:02 **** Build of configuration Debug for project Ejercicio_blinky ****
+make -j16 all 
+arm-none-eabi-size   Ejercicio_blinky.elf 
+   text	   data	    bss	    dec	    hex	filename
+  12844	     20	   2932	  15796	   3db4	Ejercicio_blinky.elf
+Finished building: default.size.stdout
+ 
+
+20:36:03 Build Finished. 0 errors, 0 warnings. (took 675ms)
+

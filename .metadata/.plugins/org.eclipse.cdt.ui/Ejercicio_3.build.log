@@ -1,0 +1,17 @@
+18:44:02 **** Incremental Build of configuration Debug for project Ejercicio_3 ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I"D:/Especialidad sistemas embebidos UBA/Programacion_de_microcontroladores/Encendido LED/PdM_workspace/Ejercicio_3/Drivers/API/Inc" -I"D:/Especialidad sistemas embebidos UBA/Programacion_de_microcontroladores/Encendido LED/PdM_workspace/Ejercicio_3/Drivers/API" -I"D:/Especialidad sistemas embebidos UBA/Programacion_de_microcontroladores/Encendido LED/PdM_workspace/Ejercicio_3/Drivers/API/Src" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Ejercicio_3.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\Especialidad sistemas embebidos UBA\Programacion_de_microcontroladores\Encendido LED\PdM_workspace\Ejercicio_3\STM32F446ZETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Ejercicio_3.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Ejercicio_3.elf
+ 
+arm-none-eabi-size   Ejercicio_3.elf 
+arm-none-eabi-objdump -h -S  Ejercicio_3.elf  > "Ejercicio_3.list"
+   text	   data	    bss	    dec	    hex	filename
+  13092	     20	   2932	  16044	   3eac	Ejercicio_3.elf
+Finished building: default.size.stdout
+ 
+Finished building: Ejercicio_3.list
+ 
+
+18:44:03 Build Finished. 0 errors, 0 warnings. (took 799ms)
+
