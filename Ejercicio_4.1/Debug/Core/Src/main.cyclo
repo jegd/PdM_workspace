@@ -1,0 +1,10 @@
+main.c:92:5:main	1
+main.c:134:6:debounceFSM_init	1
+main.c:141:6:debounceFSM_update	11
+main.c:189:6:buttonPressed	1
+main.c:195:6:buttonReleased	1
+main.c:199:6:SystemClock_Config	3
+main.c:246:13:MX_USART3_UART_Init	2
+main.c:279:13:MX_USB_OTG_FS_PCD_Init	2
+main.c:314:13:MX_GPIO_Init	1
+main.c:372:6:Error_Handler	1
