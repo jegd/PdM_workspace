@@ -93,7 +93,8 @@ int main(void)
   MX_GPIO_Init();			//Inicialización del mógulo GPIO
   uartInit();				//Inicio del módulo UART3
   /* USER CODE BEGIN 2 */
-
+  bool_t estado_1 = readKey();
+  bool_t estado_2 = readKey();
   debounceFSM_init();			//Inicio de MEF que ve el estado del boton de usuario
   /* USER CODE END 2 */
 
@@ -103,6 +104,18 @@ int main(void)
   {
     /* USER CODE END WHILE */
 	  debounceFSM_update();		//Evalua el estado del boton de usuario
+	  estado_1 = readKey();
+	  if(estado_1!=estado_2)
+	  {
+		  if(estado_1==true)
+			  uartSendString((const uint8_t *)"Flanco ascendente \n\r");
+		  if(estado_1==false)
+			  uartSendString((const uint8_t *)"Flanco descendete \n\r");
+
+	  }
+
+	  estado_2 = readKey();
+
 
     /* USER CODE BEGIN 3 */
   }
