@@ -18,7 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-
+#include "math.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -101,22 +101,44 @@ int main(void)
   //bool_t estado_2 = readKey();
   //debounceFSM_init();			//Inicio de MEF que ve el estado del boton de usuario
   /* USER CODE END 2 */
-  HAL_I2C_Master_Transmit(&hi2c1,0x53<<1,(uint8_t *) 0x32, 1, HAL_MAX_DELAY);
-  uint8_t a;
-  HAL_I2C_Master_Receive(&hi2c1, 0x53<<1, &a, 1, HAL_MAX_DELAY);
-  uint8_t b;
-  HAL_I2C_Master_Transmit(&hi2c1, 0x53<<1,(uint8_t *) 0x33, 1, HAL_MAX_DELAY);
-  HAL_I2C_Master_Receive(&hi2c1, 0x53<<1, &b, 1, HAL_MAX_DELAY);
-  HAL_I2C_Master_Transmit(&hi2c1, 0x53<<1,(uint8_t *) 0x34, 1, HAL_MAX_DELAY);
-  HAL_I2C_Master_Receive(&hi2c1, 0x53<<1, &b, 1, HAL_MAX_DELAY);
-  HAL_I2C_Master_Transmit(&hi2c1, 0x53<<1,(uint8_t *) 0x35, 1, HAL_MAX_DELAY);
-  HAL_I2C_Master_Receive(&hi2c1, 0x53<<1, &b, 1, HAL_MAX_DELAY);
+
+  //Seteo del acelerómetro para qeu empiece a mandar datos
+  uint8_t vec[2]={0x2D,0x08};
+  HAL_I2C_Master_Transmit(&hi2c1,0x53<<1,(uint8_t *)vec, 2, HAL_MAX_DELAY);
+  uint8_t a=0x32;
+
+  //Consultando X,Y
+  int16_t dato_X;
+  float dato_Y;
+  uint8_t b[2];
+  // X en registros 0x32 (Bit0) y 0x33 (Bit1)
+  HAL_I2C_Master_Transmit(&hi2c1, 0x53<<1,(uint8_t *)&a, 1, HAL_MAX_DELAY);
+  HAL_I2C_Master_Receive(&hi2c1, 0x53<<1, b, 2, HAL_MAX_DELAY);
+  dato_X=(b[1]<<8|b[0]);
+  dato_Y=dato_X/256;
+ /* a=0x33;
+  HAL_I2C_Master_Transmit(&hi2c1, 0x53<<1,(uint8_t *) &a, 1, HAL_MAX_DELAY);
+  HAL_I2C_Master_Receive(&hi2c1, 0x53<<1, b, 2, HAL_MAX_DELAY);
+  //dato_X|=(b<<8);
+
+  // X en registros 0x34 (Bit0) y 0x35 (Bit1)
+  a=0x34;
+  HAL_I2C_Master_Transmit(&hi2c1, 0x53<<1,(uint8_t *)&a, 1, HAL_MAX_DELAY);
+  HAL_I2C_Master_Receive(&hi2c1, 0x53<<1, b, 1, HAL_MAX_DELAY);
+  //dato_Y=b;
+  a=0x35;
+  HAL_I2C_Master_Transmit(&hi2c1, 0x53<<1,(uint8_t *)&a, 1, HAL_MAX_DELAY);
+  HAL_I2C_Master_Receive(&hi2c1, 0x53<<1, b, 1, HAL_MAX_DELAY);
+  //dato_Y|=(b<<8);
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
     /* USER CODE END WHILE */
-
+	  HAL_I2C_Master_Transmit(&hi2c1, 0x53<<1,(uint8_t *)&a, 1, HAL_MAX_DELAY);
+	  HAL_I2C_Master_Receive(&hi2c1, 0x53<<1, b, 2, HAL_MAX_DELAY);
+	  dato_X=(b[1]<<8|b[0]);
+	  dato_Y=(float)(dato_X)/256;
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
