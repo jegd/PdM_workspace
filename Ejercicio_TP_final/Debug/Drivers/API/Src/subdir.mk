@@ -5,18 +5,21 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../Drivers/API/Src/API_I2C.c \
+../Drivers/API/Src/API_adxl.c \
 ../Drivers/API/Src/API_debounce.c \
+../Drivers/API/Src/API_uart.c \
 ../Drivers/API/Src/Api_delay.c 
 
 OBJS += \
-./Drivers/API/Src/API_I2C.o \
+./Drivers/API/Src/API_adxl.o \
 ./Drivers/API/Src/API_debounce.o \
+./Drivers/API/Src/API_uart.o \
 ./Drivers/API/Src/Api_delay.o 
 
 C_DEPS += \
-./Drivers/API/Src/API_I2C.d \
+./Drivers/API/Src/API_adxl.d \
 ./Drivers/API/Src/API_debounce.d \
+./Drivers/API/Src/API_uart.d \
 ./Drivers/API/Src/Api_delay.d 
 
 
@@ -27,7 +30,7 @@ Drivers/API/Src/%.o Drivers/API/Src/%.su Drivers/API/Src/%.cyclo: ../Drivers/API
 clean: clean-Drivers-2f-API-2f-Src
 
 clean-Drivers-2f-API-2f-Src:
-	-$(RM) ./Drivers/API/Src/API_I2C.cyclo ./Drivers/API/Src/API_I2C.d ./Drivers/API/Src/API_I2C.o ./Drivers/API/Src/API_I2C.su ./Drivers/API/Src/API_debounce.cyclo ./Drivers/API/Src/API_debounce.d ./Drivers/API/Src/API_debounce.o ./Drivers/API/Src/API_debounce.su ./Drivers/API/Src/Api_delay.cyclo ./Drivers/API/Src/Api_delay.d ./Drivers/API/Src/Api_delay.o ./Drivers/API/Src/Api_delay.su
+	-$(RM) ./Drivers/API/Src/API_adxl.cyclo ./Drivers/API/Src/API_adxl.d ./Drivers/API/Src/API_adxl.o ./Drivers/API/Src/API_adxl.su ./Drivers/API/Src/API_debounce.cyclo ./Drivers/API/Src/API_debounce.d ./Drivers/API/Src/API_debounce.o ./Drivers/API/Src/API_debounce.su ./Drivers/API/Src/API_uart.cyclo ./Drivers/API/Src/API_uart.d ./Drivers/API/Src/API_uart.o ./Drivers/API/Src/API_uart.su ./Drivers/API/Src/Api_delay.cyclo ./Drivers/API/Src/Api_delay.d ./Drivers/API/Src/Api_delay.o ./Drivers/API/Src/Api_delay.su
 
 .PHONY: clean-Drivers-2f-API-2f-Src
 
