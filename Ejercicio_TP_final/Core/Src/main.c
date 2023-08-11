@@ -97,10 +97,9 @@ int main(void)
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
   init_adxl(DIRECCION_ADXL);
-  float X,Y;
+  int8_t X;
   /* USER CODE END 2 */
-  X=obtenerX();
-  Y=obtenerY();
+  X=estadoX();
   //Seteo del acelerómetro para qeu empiece a mandar datos
   /*
   uint8_t vec[2]={0x2D,0x08};
@@ -111,8 +110,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	  X=obtenerX();
-	  Y=obtenerY();
+	  X=estadoX();
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

@@ -19,6 +19,9 @@ typedef bool bool_t;
 bool_t init_adxl(uint16_t direccion);		//Inicializa el acelerómetro para que empiece a enviar datos
 float obtenerX(void);
 float obtenerY(void);
+int8_t estadoX(void);
+int8_t estadoY(void);
+
 
 
 #endif /* API_INC_API_ADXL_H_ */

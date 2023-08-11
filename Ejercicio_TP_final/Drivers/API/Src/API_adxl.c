@@ -9,17 +9,45 @@
 #include "API_adxl.h"
 
 //Definiciones
-#define Tiempo_out HAL_MAX_DELAY
+// Defición de tipo de variable máquina de estados para detectar cambio a 0, 1 o -1
+typedef enum{
+	ESTADO_1,
+	ESTADO_NADA_1,
+	ESTADO_0,
+	ESTADO_NADA_M1,
+	ESTADO_M1
+}	MEF_estado_eje_t;
+
+typedef struct{
+	MEF_estado_eje_t * MEF_eje;
+	float(*obtener_valor_eje)(void);
+}	eje_t;
+
 //Prototipo funciones privadas
  static void Error_Handler(void);
+ static void MEF_estado_eje_INIT(eje_t * Eje_a_evaluar);
+ static void uint8_obtener_estado_MEF_eje(eje_t * Eje_a_evaluar);
  //Definiciones
-#define TIMEOUT HAL_MAX_DELAY
+#define TIMEOUT HAL_MAX_DELAY				//Timeout de la función transmit I2C de Hal
+#define LIMIT_SUP 	0.8f
+#define LIMIT_INF	0.2f
 //Variables públicas
  uint16_t direc;
 //Variables privadas
  static I2C_HandleTypeDef *Modulo_I2C;
 static int16_t desfaseX=0,desfaseY=0;			//Variables de desfase
  static uint16_t direccion_I2C_ADXL;
+ static MEF_estado_eje_t estado_X;
+ static MEF_estado_eje_t estado_Y;
+ static eje_t 	Eje_X={
+		 .MEF_eje = &estado_X,
+		 .obtener_valor_eje = obtenerX
+ };
+ static eje_t 	Eje_Y={
+		 .MEF_eje = &estado_Y,
+		 .obtener_valor_eje = obtenerY
+ };
+ static eje_t	Eje_Y;
 //I2C_HandleTypeDef hi2c1;
 //Implementación funciones públicas
  bool_t init_adxl(uint16_t direccion)
@@ -27,6 +55,8 @@ static int16_t desfaseX=0,desfaseY=0;			//Variables de desfase
 	 assert(&direccion!=NULL);
 	 direccion_I2C_ADXL = direccion;
 	 Modulo_I2C=enviar_handle_i2c();
+	 MEF_estado_eje_INIT(&Eje_X);
+	 MEF_estado_eje_INIT(&Eje_Y);
 	  //Seteo del acelerómetro para que empiece a mandar datos
 	 // Mandamos a 1 el bit 4 (0x08) del registro 0x2D—POWER_CTL del acelerómetro
 	 // para que despierte y empiece a mandar datos
@@ -62,6 +92,76 @@ static int16_t desfaseX=0,desfaseY=0;			//Variables de desfase
 	 dato_Y=(float)ext/256;
 	 return dato_Y;
  }
+
+ int8_t estadoX(void)
+ {
+	 uint8_obtener_estado_MEF_eje(&Eje_X);
+	 int8_t valor_del_eje_X = (int8_t)(*Eje_X.MEF_eje);
+	 return valor_del_eje_X;
+ }
+ int8_t estadoY(void)
+  {
+
+  }
+
+
+ //Implementación funciones privadas
+ static void MEF_estado_eje_INIT(eje_t * Eje_a_evaluar)
+ {
+	 assert(&Eje_a_evaluar!=NULL);
+	 *(Eje_a_evaluar->MEF_eje) = ESTADO_0;
+ }
+
+
+ static void uint8_obtener_estado_MEF_eje(eje_t * Eje_a_evaluar)
+ {
+	 assert(&Eje_a_evaluar!=NULL);
+	 switch(*(Eje_a_evaluar->MEF_eje))
+	 {
+	 case ESTADO_1:
+		 // Se realiza cuando estamos en el estado 1
+		 if(Eje_a_evaluar->obtener_valor_eje() < LIMIT_SUP)
+			 *(Eje_a_evaluar->MEF_eje)=ESTADO_NADA_1;
+		 break;
+	 case ESTADO_NADA_1:
+		 // Se realiza cuando estamos en un limbo entre saber si es 1 o 0
+		 if(Eje_a_evaluar->obtener_valor_eje() > LIMIT_SUP)
+			*(Eje_a_evaluar->MEF_eje)=ESTADO_1;
+
+		 if(Eje_a_evaluar->obtener_valor_eje() < LIMIT_INF)
+			*(Eje_a_evaluar->MEF_eje)=ESTADO_0;
+	 		 break;
+	 case ESTADO_0:
+		 // Se realiza cuando estamos en el estado 0
+		 if(Eje_a_evaluar->obtener_valor_eje() > LIMIT_INF)
+			*(Eje_a_evaluar->MEF_eje)=ESTADO_NADA_1;
+
+		 if(Eje_a_evaluar->obtener_valor_eje() < (-LIMIT_INF))
+			*(Eje_a_evaluar->MEF_eje)=ESTADO_NADA_M1;
+	 		 break;
+	 case ESTADO_NADA_M1:
+		 // Se realiza cuando estamos en un limbo entre saber si es 0 o -1
+		 if(Eje_a_evaluar->obtener_valor_eje() > (-LIMIT_INF))
+			*(Eje_a_evaluar->MEF_eje)=ESTADO_0;
+
+		 if(Eje_a_evaluar->obtener_valor_eje() < (-LIMIT_SUP))
+			*(Eje_a_evaluar->MEF_eje)=ESTADO_M1;
+	 		 break;
+	 case ESTADO_M1:
+		 // Se realiza cuando estamos en el estado -1
+
+		 if(Eje_a_evaluar->obtener_valor_eje() > (-LIMIT_SUP))
+		 { *(Eje_a_evaluar->MEF_eje)=ESTADO_NADA_M1;}
+
+	 		 break;
+	 default:
+		 MEF_estado_eje_INIT(Eje_a_evaluar);
+		 break;
+
+
+	 }
+ }
+
  static void Error_Handler(void)
  {
 	  __disable_irq();
