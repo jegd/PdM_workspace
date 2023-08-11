@@ -11,22 +11,24 @@
 //Definiciones
 // Defición de tipo de variable máquina de estados para detectar cambio a 0, 1 o -1
 typedef enum{
-	ESTADO_1,
-	ESTADO_NADA_1,
-	ESTADO_0,
-	ESTADO_NADA_M1,
-	ESTADO_M1
+	ESTADO_1=1,
+	ESTADO_NADA_1=2,
+	ESTADO_0=0,
+	ESTADO_NADA_M1=-2,
+	ESTADO_M1=-1
 }	MEF_estado_eje_t;
 
 typedef struct{
 	MEF_estado_eje_t * MEF_eje;
 	float(*obtener_valor_eje)(void);
+	int8_t estadoAcel;
 }	eje_t;
 
 //Prototipo funciones privadas
  static void Error_Handler(void);
  static void MEF_estado_eje_INIT(eje_t * Eje_a_evaluar);
  static void uint8_obtener_estado_MEF_eje(eje_t * Eje_a_evaluar);
+ static void cambio_estado(eje_t * Eje_a_evaluar);
  //Definiciones
 #define TIMEOUT HAL_MAX_DELAY				//Timeout de la función transmit I2C de Hal
 #define LIMIT_SUP 	0.8f
@@ -65,7 +67,6 @@ static int16_t desfaseX=0,desfaseY=0;			//Variables de desfase
 	  //Tomamos las muestras de desfase
 	  desfaseX=(float)(obtenerX())*256;
 	  desfaseY=(float)(obtenerY())*256;
-
  }
 
  float obtenerX(void)
@@ -96,7 +97,7 @@ static int16_t desfaseX=0,desfaseY=0;			//Variables de desfase
  int8_t estadoX(void)
  {
 	 uint8_obtener_estado_MEF_eje(&Eje_X);
-	 int8_t valor_del_eje_X = (int8_t)(*Eje_X.MEF_eje);
+	 int8_t valor_del_eje_X = Eje_X.estadoAcel;
 	 return valor_del_eje_X;
  }
  int8_t estadoY(void)
@@ -122,6 +123,8 @@ static int16_t desfaseX=0,desfaseY=0;			//Variables de desfase
 		 // Se realiza cuando estamos en el estado 1
 		 if(Eje_a_evaluar->obtener_valor_eje() < LIMIT_SUP)
 			 *(Eje_a_evaluar->MEF_eje)=ESTADO_NADA_1;
+
+		 Eje_a_evaluar->estadoAcel=1;
 		 break;
 	 case ESTADO_NADA_1:
 		 // Se realiza cuando estamos en un limbo entre saber si es 1 o 0
@@ -138,6 +141,8 @@ static int16_t desfaseX=0,desfaseY=0;			//Variables de desfase
 
 		 if(Eje_a_evaluar->obtener_valor_eje() < (-LIMIT_INF))
 			*(Eje_a_evaluar->MEF_eje)=ESTADO_NADA_M1;
+
+		 Eje_a_evaluar->estadoAcel=0;
 	 		 break;
 	 case ESTADO_NADA_M1:
 		 // Se realiza cuando estamos en un limbo entre saber si es 0 o -1
@@ -153,6 +158,8 @@ static int16_t desfaseX=0,desfaseY=0;			//Variables de desfase
 		 if(Eje_a_evaluar->obtener_valor_eje() > (-LIMIT_SUP))
 		 { *(Eje_a_evaluar->MEF_eje)=ESTADO_NADA_M1;}
 
+		 Eje_a_evaluar->estadoAcel=-1;
+
 	 		 break;
 	 default:
 		 MEF_estado_eje_INIT(Eje_a_evaluar);
@@ -160,6 +167,13 @@ static int16_t desfaseX=0,desfaseY=0;			//Variables de desfase
 
 
 	 }
+ }
+
+ static void cambio_estado(eje_t * Eje_a_evaluar)
+ {
+
+
+
  }
 
  static void Error_Handler(void)
