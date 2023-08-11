@@ -42,7 +42,13 @@ void MX_I2C1_Init()
     Error_Handler();
   }
   /* USER CODE BEGIN I2C1_Init 2 */
+  /*
 
+  uint8_t vec[2]={0x2D,0x08};
+  	  HAL_I2C_Master_Transmit(&hi2c1,0x53<<1,(uint8_t *)vec, sizeof(vec), HAL_MAX_DELAY);
+
+
+  	  */
   /* USER CODE END I2C1_Init 2 */
 
 }

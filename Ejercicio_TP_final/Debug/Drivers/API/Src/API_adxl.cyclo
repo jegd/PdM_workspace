@@ -1,2 +1,4 @@
-API_adxl.c:20:9:init_adxl	1
-API_adxl.c:24:7:leer_adxl	1
+API_adxl.c:25:9:init_adxl	1
+API_adxl.c:40:8:obtenerX	1
+API_adxl.c:52:7:obtenerY	1
+API_adxl.c:56:14:Error_Handler	1

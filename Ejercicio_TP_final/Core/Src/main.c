@@ -21,7 +21,8 @@
 #include <stdio.h>
 #include<math.h>
 #include "main.h"
-#include"API_I2C.h"
+#include "API_I2C.h"
+#include "API_adxl.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -35,7 +36,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+#define DIRECCION_ADXL 0x53<<1
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -93,40 +94,21 @@ int main(void)
   MX_GPIO_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
-  //bool_t estado_1 = readKey();
-  //bool_t estado_2 = readKey();
-  //debounceFSM_init();			//Inicio de MEF que ve el estado del boton de usuario
+  init_adxl(DIRECCION_ADXL);
   /* USER CODE END 2 */
 
   //Seteo del acelerómetro para qeu empiece a mandar datos
+  /*
   uint8_t vec[2]={0x2D,0x08};
   HAL_I2C_Master_Transmit(enviar_handle_i2c(),0x53<<1,(uint8_t *)vec, 2, HAL_MAX_DELAY);
-  uint8_t a=0x32;
-
-  //Consultando X,Y
-  int16_t ext;					//Extracción
-  int16_t desfaseX,desfaseY;
-  float dato_X;
-  float dato_Y;
-  uint8_t b[4];
-  // X en registros 0x32 (Bit0) y 0x33 (Bit1)
-  HAL_I2C_Master_Transmit(enviar_handle_i2c(), 0x53<<1,(uint8_t *)&a, 1, HAL_MAX_DELAY);
-  HAL_I2C_Master_Receive(enviar_handle_i2c(), 0x53<<1, b, 4, HAL_MAX_DELAY);
-  desfaseX=(b[1]<<8|b[0]);
-  dato_X=(float)ext/256;
-  desfaseY=(b[3]<<8|b[2]);
+*/
 
 
   /* USER CODE BEGIN WHILE */
   while (1)
   {
     /* USER CODE END WHILE */
-	  HAL_I2C_Master_Transmit(enviar_handle_i2c(), 0x53<<1,(uint8_t *)&a, 1, HAL_MAX_DELAY);
-	  HAL_I2C_Master_Receive(enviar_handle_i2c(), 0x53<<1, b, 4, HAL_MAX_DELAY);
-	  ext=(b[1]<<8|b[0])-desfaseX;
-	  dato_X=(float)ext/256;
-	  ext=(b[3]<<8|b[2])-desfaseY;
-	  dato_Y=(float)ext/256;
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
