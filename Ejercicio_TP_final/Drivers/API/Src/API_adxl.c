@@ -33,7 +33,7 @@ static int16_t desfaseX=0,desfaseY=0;			//Variables de desfase
 	  uint8_t vec[2]={0x2D,0x08};
 	  HAL_I2C_Master_Transmit(Modulo_I2C,direccion_I2C_ADXL,(uint8_t *)vec, sizeof(vec), TIMEOUT);
 	  //Tomamos las muestras de desfase
-	  desfaseX=(uint16_t)(obtenerX());
+	  desfaseX=(float)(obtenerX())*256;
 
  }
 

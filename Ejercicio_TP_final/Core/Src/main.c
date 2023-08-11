@@ -23,6 +23,7 @@
 #include "main.h"
 #include "API_I2C.h"
 #include "API_adxl.h"
+#include "API_uart.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -92,23 +93,25 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  uartInit();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
   init_adxl(DIRECCION_ADXL);
+  float X;
   /* USER CODE END 2 */
-
+  X=obtenerX();
   //Seteo del acelerómetro para qeu empiece a mandar datos
   /*
   uint8_t vec[2]={0x2D,0x08};
   HAL_I2C_Master_Transmit(enviar_handle_i2c(),0x53<<1,(uint8_t *)vec, 2, HAL_MAX_DELAY);
 */
-
+  X=obtenerX();
 
   /* USER CODE BEGIN WHILE */
   while (1)
   {
     /* USER CODE END WHILE */
-
+	  X=obtenerX();
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

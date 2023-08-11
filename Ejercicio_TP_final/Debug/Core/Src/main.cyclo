@@ -1,4 +1,4 @@
-main.c:71:5:main	1
-main.c:121:6:SystemClock_Config	3
-main.c:170:13:MX_GPIO_Init	1
-main.c:228:6:Error_Handler	1
+main.c:72:5:main	1
+main.c:124:6:SystemClock_Config	3
+main.c:173:13:MX_GPIO_Init	1
+main.c:231:6:Error_Handler	1
