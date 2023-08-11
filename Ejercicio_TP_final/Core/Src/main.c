@@ -17,9 +17,11 @@
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
+
 #include <stdio.h>
 #include<math.h>
+#include "main.h"
+#include"API_I2C.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -42,7 +44,7 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
-I2C_HandleTypeDef hi2c1;
+
 
 /* USER CODE BEGIN PV */
 
@@ -51,7 +53,7 @@ I2C_HandleTypeDef hi2c1;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
-static void MX_I2C1_Init(void);
+
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -98,7 +100,7 @@ int main(void)
 
   //Seteo del acelerómetro para qeu empiece a mandar datos
   uint8_t vec[2]={0x2D,0x08};
-  HAL_I2C_Master_Transmit(&hi2c1,0x53<<1,(uint8_t *)vec, 2, HAL_MAX_DELAY);
+  HAL_I2C_Master_Transmit(enviar_handle_i2c(),0x53<<1,(uint8_t *)vec, 2, HAL_MAX_DELAY);
   uint8_t a=0x32;
 
   //Consultando X,Y
@@ -108,8 +110,8 @@ int main(void)
   float dato_Y;
   uint8_t b[4];
   // X en registros 0x32 (Bit0) y 0x33 (Bit1)
-  HAL_I2C_Master_Transmit(&hi2c1, 0x53<<1,(uint8_t *)&a, 1, HAL_MAX_DELAY);
-  HAL_I2C_Master_Receive(&hi2c1, 0x53<<1, b, 4, HAL_MAX_DELAY);
+  HAL_I2C_Master_Transmit(enviar_handle_i2c(), 0x53<<1,(uint8_t *)&a, 1, HAL_MAX_DELAY);
+  HAL_I2C_Master_Receive(enviar_handle_i2c(), 0x53<<1, b, 4, HAL_MAX_DELAY);
   desfaseX=(b[1]<<8|b[0]);
   dato_X=(float)ext/256;
   desfaseY=(b[3]<<8|b[2]);
@@ -119,8 +121,8 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	  HAL_I2C_Master_Transmit(&hi2c1, 0x53<<1,(uint8_t *)&a, 1, HAL_MAX_DELAY);
-	  HAL_I2C_Master_Receive(&hi2c1, 0x53<<1, b, 4, HAL_MAX_DELAY);
+	  HAL_I2C_Master_Transmit(enviar_handle_i2c(), 0x53<<1,(uint8_t *)&a, 1, HAL_MAX_DELAY);
+	  HAL_I2C_Master_Receive(enviar_handle_i2c(), 0x53<<1, b, 4, HAL_MAX_DELAY);
 	  ext=(b[1]<<8|b[0])-desfaseX;
 	  dato_X=(float)ext/256;
 	  ext=(b[3]<<8|b[2])-desfaseY;
@@ -176,39 +178,7 @@ void SystemClock_Config(void)
   }
 }
 
-/**
-  * @brief I2C1 Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_I2C1_Init(void)
-{
 
-  /* USER CODE BEGIN I2C1_Init 0 */
-
-  /* USER CODE END I2C1_Init 0 */
-
-  /* USER CODE BEGIN I2C1_Init 1 */
-
-  /* USER CODE END I2C1_Init 1 */
-  hi2c1.Instance = I2C1;
-  hi2c1.Init.ClockSpeed = 100000;
-  hi2c1.Init.DutyCycle = I2C_DUTYCYCLE_2;
-  hi2c1.Init.OwnAddress1 = 0;
-  hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
-  hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
-  hi2c1.Init.OwnAddress2 = 0;
-  hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
-  hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
-  if (HAL_I2C_Init(&hi2c1) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN I2C1_Init 2 */
-
-  /* USER CODE END I2C1_Init 2 */
-
-}
 
 /**
   * @brief GPIO Initialization Function

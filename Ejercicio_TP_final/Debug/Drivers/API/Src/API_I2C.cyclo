@@ -1,0 +1,2 @@
+API_I2C.c:21:6:MX_I2C1_Init	2
+API_I2C.c:49:21:enviar_handle_i2c	1
