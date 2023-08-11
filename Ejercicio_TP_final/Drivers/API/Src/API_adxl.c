@@ -10,13 +10,13 @@
 
 //Definiciones
 // Defición de tipo de variable máquina de estados para detectar cambio a 0, 1 o -1
-typedef enum{
+typedef enum {
 	ESTADO_1=1,
 	ESTADO_NADA_1=2,
 	ESTADO_0=0,
 	ESTADO_NADA_M1=-2,
 	ESTADO_M1=-1
-}	MEF_estado_eje_t;
+}  MEF_estado_eje_t;
 
 typedef struct{
 	MEF_estado_eje_t * MEF_eje;
@@ -28,7 +28,7 @@ typedef struct{
  static void Error_Handler(void);
  static void MEF_estado_eje_INIT(eje_t * Eje_a_evaluar);
  static void uint8_obtener_estado_MEF_eje(eje_t * Eje_a_evaluar);
- static void cambio_estado(eje_t * Eje_a_evaluar);
+
  //Definiciones
 #define TIMEOUT HAL_MAX_DELAY				//Timeout de la función transmit I2C de Hal
 #define LIMIT_SUP 	0.8f
@@ -67,6 +67,7 @@ static int16_t desfaseX=0,desfaseY=0;			//Variables de desfase
 	  //Tomamos las muestras de desfase
 	  desfaseX=(float)(obtenerX())*256;
 	  desfaseY=(float)(obtenerY())*256;
+	  return 1;
  }
 
  float obtenerX(void)
@@ -102,7 +103,9 @@ static int16_t desfaseX=0,desfaseY=0;			//Variables de desfase
  }
  int8_t estadoY(void)
   {
-
+	uint8_obtener_estado_MEF_eje(&Eje_Y);
+	int8_t valor_del_eje_Y = Eje_Y.estadoAcel;
+	return -valor_del_eje_Y;
   }
 
 
@@ -169,12 +172,7 @@ static int16_t desfaseX=0,desfaseY=0;			//Variables de desfase
 	 }
  }
 
- static void cambio_estado(eje_t * Eje_a_evaluar)
- {
 
-
-
- }
 
  static void Error_Handler(void)
  {

@@ -1,0 +1,4 @@
+API_LEDS.c:14:6:INIT_GPIO_LEDS	1
+API_LEDS.c:63:6:Modificar_LED_1	1
+API_LEDS.c:67:6:Modificar_LED_2	1
+API_LEDS.c:71:6:Modificar_LED_3	1
