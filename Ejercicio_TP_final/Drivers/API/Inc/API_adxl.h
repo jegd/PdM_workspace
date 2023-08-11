@@ -18,7 +18,7 @@ typedef bool bool_t;
 //Prototipo Funciones
 bool_t init_adxl(uint16_t direccion);		//Inicializa el acelerómetro para que empiece a enviar datos
 float obtenerX(void);
-void obtenerY(uint8_t * dato);
+float obtenerY(void);
 
 
 #endif /* API_INC_API_ADXL_H_ */

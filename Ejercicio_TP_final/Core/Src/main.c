@@ -97,21 +97,22 @@ int main(void)
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
   init_adxl(DIRECCION_ADXL);
-  float X;
+  float X,Y;
   /* USER CODE END 2 */
   X=obtenerX();
+  Y=obtenerY();
   //Seteo del acelerómetro para qeu empiece a mandar datos
   /*
   uint8_t vec[2]={0x2D,0x08};
   HAL_I2C_Master_Transmit(enviar_handle_i2c(),0x53<<1,(uint8_t *)vec, 2, HAL_MAX_DELAY);
 */
-  X=obtenerX();
 
   /* USER CODE BEGIN WHILE */
   while (1)
   {
     /* USER CODE END WHILE */
 	  X=obtenerX();
+	  Y=obtenerY();
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

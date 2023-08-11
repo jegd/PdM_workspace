@@ -34,6 +34,7 @@ static int16_t desfaseX=0,desfaseY=0;			//Variables de desfase
 	  HAL_I2C_Master_Transmit(Modulo_I2C,direccion_I2C_ADXL,(uint8_t *)vec, sizeof(vec), TIMEOUT);
 	  //Tomamos las muestras de desfase
 	  desfaseX=(float)(obtenerX())*256;
+	  desfaseY=(float)(obtenerY())*256;
 
  }
 
@@ -44,14 +45,22 @@ static int16_t desfaseX=0,desfaseY=0;			//Variables de desfase
 	 HAL_I2C_Master_Transmit(Modulo_I2C, direccion_I2C_ADXL,(uint8_t *)&a, sizeof(a), TIMEOUT);
 	 uint8_t b[2];
 	 int16_t ext;
-	 HAL_I2C_Master_Receive(enviar_handle_i2c(), 0x53<<1, b, sizeof(b), HAL_MAX_DELAY);
+	 HAL_I2C_Master_Receive(enviar_handle_i2c(), direccion_I2C_ADXL, b, sizeof(b), TIMEOUT);
 	 ext=(b[1]<<8|b[0])-desfaseX;
 	 dato_X=(float)ext/256;
 	 return dato_X;
  }
- void obtenerY(uint8_t * dato)
+ float obtenerY(void)
  {
-
+	 uint8_t a=0x34;				//Registro que se debe consultar en el acelerómetro para tener el primer byte de datos Y
+	 float dato_Y;
+	 HAL_I2C_Master_Transmit(Modulo_I2C, direccion_I2C_ADXL,(uint8_t *)&a, sizeof(a), TIMEOUT);
+	 uint8_t b[2];
+	 int16_t ext;
+	 HAL_I2C_Master_Receive(enviar_handle_i2c(), direccion_I2C_ADXL, b, sizeof(b), TIMEOUT);
+	 ext=(b[1]<<8|b[0])-desfaseY;
+	 dato_Y=(float)ext/256;
+	 return dato_Y;
  }
  static void Error_Handler(void)
  {

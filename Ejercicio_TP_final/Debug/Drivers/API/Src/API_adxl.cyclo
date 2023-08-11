@@ -1,4 +1,4 @@
 API_adxl.c:25:9:init_adxl	1
-API_adxl.c:40:8:obtenerX	1
-API_adxl.c:52:7:obtenerY	1
-API_adxl.c:56:14:Error_Handler	1
+API_adxl.c:41:8:obtenerX	1
+API_adxl.c:53:8:obtenerY	1
+API_adxl.c:65:14:Error_Handler	1
