@@ -99,6 +99,8 @@ int main(void)
   ctrl_leds_acel_INIT();
   /* USER CODE BEGIN 2 */
   init_adxl(DIRECCION_ADXL);
+
+
   int8_t X,Y;
   /* USER CODE END 2 */
   X=estadoX();

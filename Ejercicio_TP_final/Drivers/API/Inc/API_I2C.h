@@ -13,7 +13,6 @@
 #include "stm32f4xx_hal.h"
 //Definiciones
 typedef bool bool_t;
-
 void MX_I2C1_Init();
 I2C_HandleTypeDef* enviar_handle_i2c();
 

@@ -1,3 +1,4 @@
 Api_delay.c:3:6:delayInit	1
 Api_delay.c:9:8:delayRead	4
 Api_delay.c:24:6:delayWrite	1
+Api_delay.c:28:6:nueva_cuenta	1

@@ -25,3 +25,7 @@ void delayWrite( delay_t * delay, tick_t duration ){
 	assert(delay!= NULL);
 	delay->duration = duration;
 }
+void nueva_cuenta(delay_t * delay)
+{
+	delay->startTime = HAL_GetTick();
+}

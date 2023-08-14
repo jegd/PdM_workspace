@@ -15,6 +15,7 @@
 #include<stdbool.h>
 #include <main.h>
 #include "API_LEDS.h"
+#include "Api_delay.h"
 typedef bool bool_t;
 
 bool_t ctrl_leds_acel_INIT(void);
