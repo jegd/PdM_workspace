@@ -3,9 +3,8 @@
 
 #include"API_uart.h"
 #include<string.h>
-//Variables Públicas
-//Variables privadas
-UART_HandleTypeDef huart3;
+
+//Definiciones Macros
 #define USART USART3
 #define BAUDIOS 9600
 #define PALABRA UART_WORDLENGTH_8B
@@ -14,7 +13,12 @@ UART_HandleTypeDef huart3;
 #define MODO UART_MODE_TX_RX
 #define FLOW UART_HWCONTROL_NONE
 #define TIME UART_OVERSAMPLING_16
+//Variables Públicas
+//Variables privadas
+UART_HandleTypeDef huart3;
 PCD_HandleTypeDef hpcd_USB_OTG_FS;
+bool_t uart_activado=0;
+
 
 //Prototipos Funciones Públicas
 bool_t uartInit();
@@ -33,7 +37,10 @@ bool_t uartInit(void)
 	 MX_USART3_UART_Init();
 	 MX_USB_OTG_FS_PCD_Init();
 	 if (HAL_UART_Init(&huart3) == HAL_OK)
-	 Estado_uart = true;
+	 {
+		 Estado_uart = true;
+		 uart_activado=1;
+	 }
 	 // Mensaje de inicialización y parámetros de
 	 uartSendString((const uint8_t *) "\n\rInicializacion de UART exitosa \n\r");
 	 uartSendString((const uint8_t *) "Parametros de UART \n\r ");
@@ -64,6 +71,10 @@ void uartSendStringSize( const uint8_t * pstring, uint16_t size)
 	 {
 		 HAL_UART_Transmit(&huart3,(const uint8_t *)puntero++,1,200);
 	 }
+}
+bool_t consultar_uart(void)
+{
+	return uart_activado;
 }
 
 /**
@@ -139,4 +150,6 @@ static void Error_Handler(void)
   }
   /* USER CODE END Error_Handler_Debug */
 }
+
+
 

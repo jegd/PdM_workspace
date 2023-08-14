@@ -11,3 +11,4 @@ bool_t uartInit();
 void uartSendString(const uint8_t * pstring);								//Función para configurar UART y enviar mensaje por UART3
 void uartSendStringSize(const uint8_t * pstring, uint16_t size);			//Función que envía palabra pidiendo tamaño a transmitir
 void uartReceiveStringSize(uint8_t * pstring, uint16_t size);
+bool_t consultar_uart(void);

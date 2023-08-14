@@ -120,6 +120,7 @@ void update_leds_acel(int8_t valor_entrada_1, int8_t valor_entrada_2)
 static void funcion_adelante(void)
 {
 	Modificar_LED_2(1);
+	if(consultar_uart())
 	uartSendString((const uint8_t *)"\rAdelante\n\r");
 }
 static void funcion_base(void)
@@ -127,6 +128,7 @@ static void funcion_base(void)
 	Modificar_LED_1(0);
 	Modificar_LED_2(0);
 	Modificar_LED_3(0);
+	if(consultar_uart())
 	uartSendString((const uint8_t *)"\rBase\n\r");
 }
 static void funcion_atras(void)
@@ -134,16 +136,19 @@ static void funcion_atras(void)
 	Modificar_LED_2(1);
 	estado_led_2=1;
 	nueva_cuenta(&retraso_parpadeo);
+	if(consultar_uart())
 	uartSendString((const uint8_t *)"\rAtras\n\r");
 }
 static void funcion_izquierda(void)
 {
 	Modificar_LED_3(1);
+	if(consultar_uart())
 	uartSendString((const uint8_t *)"\rIzquierda\n\r");
 }
 static void funcion_derecha(void)
 {
 	Modificar_LED_1(1);
+	if(consultar_uart())
 	uartSendString((const uint8_t *)"\rDerecha\n\r");
 }
 static void funcion_parpadeo_led_2(void)
