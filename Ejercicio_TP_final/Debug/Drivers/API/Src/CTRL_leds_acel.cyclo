@@ -1,8 +1,8 @@
 CTRL_leds_acel.c:43:8:ctrl_leds_acel_INIT	1
 CTRL_leds_acel.c:53:6:update_leds_acel	15
 CTRL_leds_acel.c:120:13:funcion_adelante	1
-CTRL_leds_acel.c:124:13:funcion_base	1
-CTRL_leds_acel.c:130:13:funcion_atras	1
-CTRL_leds_acel.c:137:13:funcion_izquierda	1
-CTRL_leds_acel.c:141:13:funcion_derecha	1
-CTRL_leds_acel.c:145:13:funcion_parpadeo_led_2	2
+CTRL_leds_acel.c:125:13:funcion_base	1
+CTRL_leds_acel.c:132:13:funcion_atras	1
+CTRL_leds_acel.c:139:13:funcion_izquierda	1
+CTRL_leds_acel.c:144:13:funcion_derecha	1
+CTRL_leds_acel.c:149:13:funcion_parpadeo_led_2	2
