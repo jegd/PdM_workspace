@@ -8,7 +8,6 @@
 "./Drivers/API/Src/API_I2C.o"
 "./Drivers/API/Src/API_LEDS.o"
 "./Drivers/API/Src/API_adxl.o"
-"./Drivers/API/Src/API_debounce.o"
 "./Drivers/API/Src/API_uart.o"
 "./Drivers/API/Src/Api_delay.o"
 "./Drivers/API/Src/CTRL_leds_acel.o"

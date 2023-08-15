@@ -10,6 +10,9 @@
 #include "main.h"
 
 //Implementación de funciones públicas
+/*
+ * Se inicializa los GPIO de los leds de la placa
+ */
 
 void INIT_GPIO_LEDS(void)
 {
@@ -60,14 +63,17 @@ void INIT_GPIO_LEDS(void)
 	/* USER CODE BEGIN MX_GPIO_Init_2 */
 	/* USER CODE END MX_GPIO_Init_2 */
 }
+//Escribe el valor booleano deseado en el LED1
 void Modificar_LED_1(bool_t valor)
 {
 	HAL_GPIO_WritePin(GPIOB,LD1_Pin,valor);
 }
+//Escribe el valor booleano deseado en el LED2
 void Modificar_LED_2(bool_t valor)
 {
 	HAL_GPIO_WritePin(GPIOB,LD2_Pin,valor);
 }
+//Escribe el valor booleano deseado en el LED3
 void Modificar_LED_3(bool_t valor)
 {
 	HAL_GPIO_WritePin(GPIOB,LD3_Pin,valor);

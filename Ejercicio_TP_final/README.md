@@ -1,12 +1,11 @@
-EJERCICIO 4.2
+EJERCICIO TP FINAL
 
-En este proyecto se desarrolla el driver que permite conocer el estado del
-botón de usuario de la placa de desarrollo Nucleo-F446ZE
+En este proyecto se desarrolla el driver que permite conocer la dirección en al que se inclina un acelerómetro ADXL345
+leyéndolo por medio del protocolo I2C con una tarjeta de desarrollo Nucleo-F446ZE
 
-Se cambia el estado del led 1 en el flanco de subida
-Se cambia el estado del led 3 en el flanco de bajada
+Si se inclina hacia adelante se prende el LED2 de la placa de desarrollo y manda mensaje por UART (Adelante)
+Si se inclina hacia la izquierda se prende el LED2 de la placa de desarrollo y manda mensaje por UART (Izquierda)
+Si se inclina hacia la derecha adelante se prende el LED2 de la placa de desarrollo y manda mensaje por UART (Derecha)
+Si se inclina hacia atrás se prende el LED2 de la placa de desarrollo y manda mensaje por UART (Atras)
+Si no se inclina se apagan todos los leds de la placa de desarrollo y manda mensaje por UART (Base)
 
-Se tiene la funcion readKey que indica por medio de un booleano 
-si se presionó o no el botón de usuario
-
-Sólo se tienen 3 funciones públicas

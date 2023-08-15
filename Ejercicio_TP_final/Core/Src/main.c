@@ -2,6 +2,7 @@
 /**
   ******************************************************************************
   * @file           : main.c
+  * @author			: Jesus Gonzales
   * @brief          : Main program body
   ******************************************************************************
   * @attention
@@ -38,7 +39,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define DIRECCION_ADXL 0x53<<1
+#define DIRECCION_ADXL 0x53<<1				//Dirección de memoria I2C del módulo
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -54,9 +55,7 @@
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
-void SystemClock_Config(void);
-
-
+void SystemClock_Config(void);				//Configuración del clock del microcontrolador
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -94,32 +93,28 @@ int main(void)
 
   /* Initialize all configured peripherals */
 
-  uartInit();
-  MX_I2C1_Init();
-  ctrl_leds_acel_INIT();
+  uartInit();								//Función de inicialización del periférico UART3
+  MX_I2C1_Init();							//Función de inicialización del periférico I2C1
+  ctrl_leds_acel_INIT();					//Función de inicialización del control de leds por acelerómetro
+  init_adxl(DIRECCION_ADXL);				//Función de inicialización del acelerómetro ADXL345 con la dirección definida al inicio
   /* USER CODE BEGIN 2 */
-  init_adxl(DIRECCION_ADXL);
-
-
-  int8_t X,Y;
+  //Variables
+    int8_t X,Y;								//Variables para almacenar los estados del acelerómetro en el eje X e Y
+    X=estadoX();
+    Y=estadoY();
+    update_leds_acel(X,Y);
   /* USER CODE END 2 */
-  X=estadoX();
-  Y=estadoY();
-  update_leds_acel(X,Y);
+
   //Seteo del acelerómetro para qeu empiece a mandar datos
-  /*
-  uint8_t vec[2]={0x2D,0x08};
-  HAL_I2C_Master_Transmit(enviar_handle_i2c(),0x53<<1,(uint8_t *)vec, 2, HAL_MAX_DELAY);
-*/
+
 
   /* USER CODE BEGIN WHILE */
   while (1)
   {
     /* USER CODE END WHILE */
-
-	  X=estadoX();
-	  Y=estadoY();
-	  update_leds_acel(X,Y);
+	  X=estadoX();							//Lectura del acelerómetro para conocer su estado en el eje X
+	  Y=estadoY();							//Lectura del acelerómetro para conocer su estado en el eje Y
+	  update_leds_acel(X,Y);				//Dependiendo de los estados de los ejes X e Y se actualiza los valores de los LEDS
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

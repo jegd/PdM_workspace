@@ -8,7 +8,6 @@ C_SRCS += \
 ../Drivers/API/Src/API_I2C.c \
 ../Drivers/API/Src/API_LEDS.c \
 ../Drivers/API/Src/API_adxl.c \
-../Drivers/API/Src/API_debounce.c \
 ../Drivers/API/Src/API_uart.c \
 ../Drivers/API/Src/Api_delay.c \
 ../Drivers/API/Src/CTRL_leds_acel.c 
@@ -17,7 +16,6 @@ OBJS += \
 ./Drivers/API/Src/API_I2C.o \
 ./Drivers/API/Src/API_LEDS.o \
 ./Drivers/API/Src/API_adxl.o \
-./Drivers/API/Src/API_debounce.o \
 ./Drivers/API/Src/API_uart.o \
 ./Drivers/API/Src/Api_delay.o \
 ./Drivers/API/Src/CTRL_leds_acel.o 
@@ -26,7 +24,6 @@ C_DEPS += \
 ./Drivers/API/Src/API_I2C.d \
 ./Drivers/API/Src/API_LEDS.d \
 ./Drivers/API/Src/API_adxl.d \
-./Drivers/API/Src/API_debounce.d \
 ./Drivers/API/Src/API_uart.d \
 ./Drivers/API/Src/Api_delay.d \
 ./Drivers/API/Src/CTRL_leds_acel.d 
@@ -39,7 +36,7 @@ Drivers/API/Src/%.o Drivers/API/Src/%.su Drivers/API/Src/%.cyclo: ../Drivers/API
 clean: clean-Drivers-2f-API-2f-Src
 
 clean-Drivers-2f-API-2f-Src:
-	-$(RM) ./Drivers/API/Src/API_I2C.cyclo ./Drivers/API/Src/API_I2C.d ./Drivers/API/Src/API_I2C.o ./Drivers/API/Src/API_I2C.su ./Drivers/API/Src/API_LEDS.cyclo ./Drivers/API/Src/API_LEDS.d ./Drivers/API/Src/API_LEDS.o ./Drivers/API/Src/API_LEDS.su ./Drivers/API/Src/API_adxl.cyclo ./Drivers/API/Src/API_adxl.d ./Drivers/API/Src/API_adxl.o ./Drivers/API/Src/API_adxl.su ./Drivers/API/Src/API_debounce.cyclo ./Drivers/API/Src/API_debounce.d ./Drivers/API/Src/API_debounce.o ./Drivers/API/Src/API_debounce.su ./Drivers/API/Src/API_uart.cyclo ./Drivers/API/Src/API_uart.d ./Drivers/API/Src/API_uart.o ./Drivers/API/Src/API_uart.su ./Drivers/API/Src/Api_delay.cyclo ./Drivers/API/Src/Api_delay.d ./Drivers/API/Src/Api_delay.o ./Drivers/API/Src/Api_delay.su ./Drivers/API/Src/CTRL_leds_acel.cyclo ./Drivers/API/Src/CTRL_leds_acel.d ./Drivers/API/Src/CTRL_leds_acel.o ./Drivers/API/Src/CTRL_leds_acel.su
+	-$(RM) ./Drivers/API/Src/API_I2C.cyclo ./Drivers/API/Src/API_I2C.d ./Drivers/API/Src/API_I2C.o ./Drivers/API/Src/API_I2C.su ./Drivers/API/Src/API_LEDS.cyclo ./Drivers/API/Src/API_LEDS.d ./Drivers/API/Src/API_LEDS.o ./Drivers/API/Src/API_LEDS.su ./Drivers/API/Src/API_adxl.cyclo ./Drivers/API/Src/API_adxl.d ./Drivers/API/Src/API_adxl.o ./Drivers/API/Src/API_adxl.su ./Drivers/API/Src/API_uart.cyclo ./Drivers/API/Src/API_uart.d ./Drivers/API/Src/API_uart.o ./Drivers/API/Src/API_uart.su ./Drivers/API/Src/Api_delay.cyclo ./Drivers/API/Src/Api_delay.d ./Drivers/API/Src/Api_delay.o ./Drivers/API/Src/Api_delay.su ./Drivers/API/Src/CTRL_leds_acel.cyclo ./Drivers/API/Src/CTRL_leds_acel.d ./Drivers/API/Src/CTRL_leds_acel.o ./Drivers/API/Src/CTRL_leds_acel.su
 
 .PHONY: clean-Drivers-2f-API-2f-Src
 

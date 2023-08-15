@@ -1,8 +1,8 @@
 API_adxl.c:55:9:init_adxl	1
-API_adxl.c:73:8:obtenerX	1
-API_adxl.c:85:8:obtenerY	1
-API_adxl.c:98:9:estadoX	1
-API_adxl.c:104:9:estadoY	1
-API_adxl.c:113:14:MEF_estado_eje_INIT	1
-API_adxl.c:120:14:uint8_obtener_estado_MEF_eje	14
-API_adxl.c:177:14:Error_Handler	1
+API_adxl.c:80:8:obtenerX	1
+API_adxl.c:101:8:obtenerY	1
+API_adxl.c:120:9:estadoX	1
+API_adxl.c:130:9:estadoY	1
+API_adxl.c:144:14:MEF_estado_eje_INIT	1
+API_adxl.c:154:14:obtener_estado_MEF_eje	14
+API_adxl.c:215:14:Error_Handler	1

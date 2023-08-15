@@ -40,6 +40,13 @@ static bool_t estado_led_2;
 
 //Implentación de funciones públicas
 
+/*
+ * Función que inicializa:
+ * - Los GPIO de los leds con ayuda del driver LEDS
+ * - El delay no bloqueante para el parpadeo del led 2
+ * - La maquina de estados del control de leds
+ */
+
 bool_t ctrl_leds_acel_INIT(void)
 {
 	assert(&Estado_actual!=NULL);
@@ -50,6 +57,11 @@ bool_t ctrl_leds_acel_INIT(void)
 }
 
 //Función para indentificar en que estado se debe encontrar la máquina
+
+/*
+ * Función actualiza el dato de la máquina de estados de control de leds
+ * dependiendo de los 2 valores ingresados que representan al eje X e Y
+ */
 void update_leds_acel(int8_t valor_entrada_1, int8_t valor_entrada_2)
 {
 	switch(Estado_actual)
@@ -117,12 +129,14 @@ void update_leds_acel(int8_t valor_entrada_1, int8_t valor_entrada_2)
 
 //Implementación de funciones privadas
 
+//Función a realizar en estado ADELANTE
 static void funcion_adelante(void)
 {
 	Modificar_LED_2(1);
 	if(consultar_uart())
 	uartSendString((const uint8_t *)"\rAdelante\n\r");
 }
+//Función a realizar en estado BASE
 static void funcion_base(void)
 {
 	Modificar_LED_1(0);
@@ -131,6 +145,7 @@ static void funcion_base(void)
 	if(consultar_uart())
 	uartSendString((const uint8_t *)"\rBase\n\r");
 }
+//Función a realizar en estado ATRAS
 static void funcion_atras(void)
 {
 	Modificar_LED_2(1);
@@ -139,18 +154,21 @@ static void funcion_atras(void)
 	if(consultar_uart())
 	uartSendString((const uint8_t *)"\rAtras\n\r");
 }
+//Función a realizar en estado IZQUIERDA
 static void funcion_izquierda(void)
 {
 	Modificar_LED_3(1);
 	if(consultar_uart())
 	uartSendString((const uint8_t *)"\rIzquierda\n\r");
 }
+//Función a realizar en estado DERECHA
 static void funcion_derecha(void)
 {
 	Modificar_LED_1(1);
 	if(consultar_uart())
 	uartSendString((const uint8_t *)"\rDerecha\n\r");
 }
+//Función a realizar el parpadeo del led 2 con retardo no bloqueante
 static void funcion_parpadeo_led_2(void)
 {
 	if(!delayRead(&retraso_parpadeo))

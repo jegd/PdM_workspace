@@ -8,9 +8,11 @@
 //Includes
 #include "API_I2C.h"
 
-//Variables privadas
-static I2C_HandleTypeDef hi2c1;
 
+#define TIMEOUT HAL_MAX_DELAY												//Timeout de la función transmit I2C de Hal
+//Variables privadas
+static I2C_HandleTypeDef hi2c1;						//Handle I2C que se utiliza en el driver
+static void  Error_Handler(void);					//Función para manejar error de inicialización en el driver
 
 
 /**
@@ -42,17 +44,32 @@ void MX_I2C1_Init()
     Error_Handler();
   }
   /* USER CODE BEGIN I2C1_Init 2 */
-  /*
 
-  uint8_t vec[2]={0x2D,0x08};
-  	  HAL_I2C_Master_Transmit(&hi2c1,0x53<<1,(uint8_t *)vec, sizeof(vec), HAL_MAX_DELAY);
-
-
-  	  */
   /* USER CODE END I2C1_Init 2 */
 
+
+/*
+ * Función pública que permite enviar el puntero al handle I2C que contiene la información del periférico I2C
+ * que se está utilizando
+*/
 }
 I2C_HandleTypeDef * enviar_handle_i2c()
 {
+	assert(&hi2c1!=NULL);
 	return &hi2c1;
+}
+
+void escribir_por_I2C(uint16_t direccion_I2C,uint8_t * dato,uint16_t tamano)
+{
+	HAL_I2C_Master_Transmit(&hi2c1,direccion_I2C,dato, tamano, TIMEOUT);
+}
+
+void leer_por_I2C(uint16_t direccion_I2C,uint8_t * dato_alma,uint16_t tamano)
+{
+	 HAL_I2C_Master_Receive(&hi2c1, direccion_I2C, dato_alma, tamano, TIMEOUT);
+}
+
+static void  Error_Handler(void)
+{
+	//funcion de error
 }

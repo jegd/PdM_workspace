@@ -19,7 +19,7 @@
 #include "API_uart.h"
 typedef bool bool_t;
 
-bool_t ctrl_leds_acel_INIT(void);
-void update_leds_acel(int8_t valor_entrada_1, int8_t valor_entrada_2);
+bool_t ctrl_leds_acel_INIT(void);													//Inicializa las varaibles internas necesarias del control de leds
+void update_leds_acel(int8_t valor_entrada_1, int8_t valor_entrada_2);				//Actualiza el estado de los leds, dependiendo de 2 valores de entrada
 
 #endif /* API_INC_CTRL_LEDS_ACEL_H_ */

@@ -1,2 +1,5 @@
-API_I2C.c:21:6:MX_I2C1_Init	2
-API_I2C.c:55:21:enviar_handle_i2c	1
+API_I2C.c:23:6:MX_I2C1_Init	2
+API_I2C.c:56:21:enviar_handle_i2c	1
+API_I2C.c:62:6:escribir_por_I2C	1
+API_I2C.c:67:6:leer_por_I2C	1
+API_I2C.c:72:14:Error_Handler	1
