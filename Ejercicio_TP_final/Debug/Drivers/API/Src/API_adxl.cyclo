@@ -5,4 +5,4 @@ API_adxl.c:120:9:estadoX	1
 API_adxl.c:130:9:estadoY	1
 API_adxl.c:144:14:MEF_estado_eje_INIT	1
 API_adxl.c:154:14:obtener_estado_MEF_eje	14
-API_adxl.c:215:14:Error_Handler	1
+API_adxl.c:222:14:Error_Handler	1

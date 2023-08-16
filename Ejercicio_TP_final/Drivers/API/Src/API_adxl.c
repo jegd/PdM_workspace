@@ -158,51 +158,33 @@ static eje_t 	Eje_X={
 	 {
 	 case ESTADO_1:
 		 // Se realiza cuando estamos en el estado 1
-		 if(Eje_a_evaluar->obtener_valor_eje() < LIMIT_SUP)
-			 *(Eje_a_evaluar->MEF_eje)=ESTADO_NADA_1;
-
+		 *(Eje_a_evaluar->MEF_eje)=(Eje_a_evaluar->obtener_valor_eje() < LIMIT_SUP)?ESTADO_NADA_1:*(Eje_a_evaluar->MEF_eje);
 		 Eje_a_evaluar->estadoAcel=1;
 		 break;
 	 case ESTADO_NADA_1:
 		 // Se realiza cuando estamos en un limbo entre saber si es 1 o 0
-		 if(Eje_a_evaluar->obtener_valor_eje() > LIMIT_SUP)
-			*(Eje_a_evaluar->MEF_eje)=ESTADO_1;
-
-		 if(Eje_a_evaluar->obtener_valor_eje() < LIMIT_INF)
-			*(Eje_a_evaluar->MEF_eje)=ESTADO_0;
+		 *(Eje_a_evaluar->MEF_eje)=(Eje_a_evaluar->obtener_valor_eje() > LIMIT_SUP)?ESTADO_1:*(Eje_a_evaluar->MEF_eje);
+		 *(Eje_a_evaluar->MEF_eje)=(Eje_a_evaluar->obtener_valor_eje() < LIMIT_INF)?ESTADO_0:*(Eje_a_evaluar->MEF_eje);
 	 		 break;
 	 case ESTADO_0:
 		 // Se realiza cuando estamos en el estado 0
-		 if(Eje_a_evaluar->obtener_valor_eje() > LIMIT_INF)
-			*(Eje_a_evaluar->MEF_eje)=ESTADO_NADA_1;
-
-		 if(Eje_a_evaluar->obtener_valor_eje() < (-LIMIT_INF))
-			*(Eje_a_evaluar->MEF_eje)=ESTADO_NADA_M1;
-
+		 *(Eje_a_evaluar->MEF_eje)=(Eje_a_evaluar->obtener_valor_eje() > LIMIT_INF)?ESTADO_NADA_1:*(Eje_a_evaluar->MEF_eje);
+		 *(Eje_a_evaluar->MEF_eje)=(Eje_a_evaluar->obtener_valor_eje() < (-LIMIT_INF))?ESTADO_NADA_M1:*(Eje_a_evaluar->MEF_eje);
 		 Eje_a_evaluar->estadoAcel=0;
 	 		 break;
 	 case ESTADO_NADA_M1:
 		 // Se realiza cuando estamos en un limbo entre saber si es 0 o -1
-		 if(Eje_a_evaluar->obtener_valor_eje() > (-LIMIT_INF))
-			*(Eje_a_evaluar->MEF_eje)=ESTADO_0;
-
-		 if(Eje_a_evaluar->obtener_valor_eje() < (-LIMIT_SUP))
-			*(Eje_a_evaluar->MEF_eje)=ESTADO_M1;
+		 *(Eje_a_evaluar->MEF_eje)=(Eje_a_evaluar->obtener_valor_eje() > (-LIMIT_INF))?ESTADO_0:*(Eje_a_evaluar->MEF_eje);
+		 *(Eje_a_evaluar->MEF_eje)=(Eje_a_evaluar->obtener_valor_eje() < (-LIMIT_SUP))?ESTADO_M1:*(Eje_a_evaluar->MEF_eje);
 	 		 break;
 	 case ESTADO_M1:
 		 // Se realiza cuando estamos en el estado -1
-
-		 if(Eje_a_evaluar->obtener_valor_eje() > (-LIMIT_SUP))
-		 { *(Eje_a_evaluar->MEF_eje)=ESTADO_NADA_M1;}
-
+		 *(Eje_a_evaluar->MEF_eje)=(Eje_a_evaluar->obtener_valor_eje() > (-LIMIT_SUP))?ESTADO_NADA_M1:*(Eje_a_evaluar->MEF_eje);
 		 Eje_a_evaluar->estadoAcel=-1;
-
 	 		 break;
 	 default:
 		 MEF_estado_eje_INIT(Eje_a_evaluar);
 		 break;
-
-
 	 }
  }
 

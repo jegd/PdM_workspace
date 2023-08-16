@@ -18,25 +18,25 @@ typedef enum{
 	DERECHA
 } MEF_ctrl_leds_acel;
 
-#define PASO_ADELANTE 1
-#define PASO_ATRAS -1
-#define PASO_DERECHA 1
-#define PASO_IZQUIERDA -1
-#define PASO_BASE 0
-#define TIEMPO_PARP_ATRAS 500
+#define PASO_ADELANTE 1									//Valor asignado para Adelante
+#define PASO_ATRAS -1									//Valor asignado para Atrás
+#define PASO_DERECHA 1									//Valor asignado para Derecha
+#define PASO_IZQUIERDA -1								//Valor asignado para Izquierda
+#define PASO_BASE 0										//Valor asignado para Base
+#define TIEMPO_PARP_ATRAS 500							//Valor en ms para el retardo de parpadeo
 //Funciones privadas
-static void funcion_adelante(void);
-static void funcion_base(void);
-static void funcion_atras(void);
-static void funcion_izquierda(void);
-static void funcion_derecha(void);
-static void funcion_parpadeo_led_2(void);
+static void funcion_adelante(void);						//Función a utilizar en el estado Adelante
+static void funcion_base(void);							//Función a utilizar en el estado Base
+static void funcion_atras(void);						//Función a utilizar en el estado Atrás
+static void funcion_izquierda(void);					//Función a utilizar en el estado Izquierda
+static void funcion_derecha(void);						//Función a utilizar en el estado Derecha
+static void funcion_parpadeo_led_2(void);				//Función a utilizar para realizar el parpadeo del led 2
 
 //Variables privadas
 //static uint16_t vector_leds[]= {LD1_Pin,LD2_Pin,LD3_Pin};
-static MEF_ctrl_leds_acel Estado_actual;
-static delay_t retraso_parpadeo; 				//Inicialización retraso para parpadeo led 2
-static bool_t estado_led_2;
+static MEF_ctrl_leds_acel Estado_actual;				//MEF para ver el estado de control de leds
+static delay_t retraso_parpadeo; 						//Inicialización retraso para parpadeo led 2
+static bool_t estado_led_2;								//Variable para conocer y manejar el estado del led2
 
 //Implentación de funciones públicas
 
