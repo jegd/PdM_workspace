@@ -39,7 +39,9 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define DIRECCION_ADXL 0x53<<1				//Dirección de memoria I2C del módulo
+//Dirección de memoria I2C del módulo a utilizar por defecto es 0x53 pero no incluye el bit de lectura/escritura
+//por lo que se debe desplazar la dirección en 1 bit
+#define DIRECCION_ADXL 0x53<<1
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
